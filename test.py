@@ -1,0 +1,17 @@
+from preprocessing import *
+
+[test_without_PP, test_with_PP] = preprocess("test.txt", "testPP.txt")
+[train_without_PP, train_with_PP] = preprocess("training.txt", "trainingPP.txt")
+
+
+print(train_with_PP)
+print(test_with_PP)
+
+print("Number of word types in training corpus: " + str(len(train_with_PP)))
+print("Total number word tokens in training corpus: " + str(sum(train_with_PP.values())))
+
+[unseen_types_percent, unseen_tokens_percent] = find_percent_of_unseens(train_without_PP, test_without_PP)
+
+print('unseen types percent', unseen_types_percent)
+
+print('unseen tokens percent', unseen_tokens_percent)
