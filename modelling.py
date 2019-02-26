@@ -31,6 +31,7 @@ def compute_unigram_log_prob(text, corpus):
         else:
             freq['<unk>'] += 1
     n = sum(corpus.values())
+
     print('The frequencies of each parameter needed to compute the probabilities are:', freq)
     print('The total # of tokens is:', n)
 
@@ -41,5 +42,11 @@ def compute_unigram_log_prob(text, corpus):
     print('The log (base 2) probabilities are:', log_freq)
 
     log_prob = sum(log_freq.values())
-    print('The sum of these log probabilities (and the log probability of this sentence) is: ', log_prob)
-    return freq
+    print('The sum of these log probabilities (and the log probability of this text) is: ', log_prob)
+
+    avg_log_prob = log_prob/n
+    print('The average log probability for this text is: ', avg_log_prob)
+
+    perplexity = 2 ** (-avg_log_prob)
+
+    print('The perplexity for this text is: ', perplexity)

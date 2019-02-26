@@ -15,21 +15,29 @@ def count_frequencies(text):
     return freq
 
 
-def preprocess(file_to_read, file_to_write):
+def preprocess(file_to_read, file_to_write, training_corpus):
     read = open(file_to_read, "r")
-    text = pad_and_lowercase(read.readlines())
-    original_freq = count_frequencies(text)
+    words = pad_and_lowercase(read.readlines())
+    original_freq = count_frequencies(words)
 
-    # replace words which occur just once with <unk> token
-    for i in range(len(text)):
-        if original_freq[text[i]] == 1:
-            text[i] = "<unk>"
+    if training_corpus is None:  # if this is a training corpus
+        # replace words which occur just once with <unk> token
+        for i in range(len(words)):
+            if original_freq[words[i]] == 1:
+                words[i] = "<unk>"
+
+    else:  # if this is a test corpus
+        # replace words which occur just once with <unk> token
+        for i in range(len(words)):
+            if words[i] not in training_corpus:
+                words[i] = "<unk>"
 
     # count up frequencies of words in the text again, this time with <unk>
-    replaced_freq = count_frequencies(text)
+    replaced_freq = count_frequencies(words)
 
     write_file = open(file_to_write, "w")
-    write_file.write(' '.join(text))
+    text = ' '.join(words)
+    write_file.write(text)
     write_file.close()
 
-    return [original_freq, replaced_freq]
+    return [original_freq, replaced_freq, text]

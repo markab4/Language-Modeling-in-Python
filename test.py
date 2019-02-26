@@ -17,9 +17,12 @@ print("Total number word tokens in training corpus: " + str(sum(train_with_PP.va
 #
 # print('unseen tokens percent', unseen_tokens_percent)
 
-sentences = ["He was laughed off the screen . ", "There was no compulsion behind them . ", "I look forward to hearing your reply . "]
+sentences = ["He was laughed off the screen . ",
+             "There was no compulsion behind them . ",
+             "I look forward to hearing your reply . "]
 
 for sentence in sentences:
+    print('For the sentence "' + sentence + '": ')
     padded_text = pad_and_lowercase([sentence])
     compute_unigram_log_prob(padded_text, train_with_PP)
 
