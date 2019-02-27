@@ -20,33 +20,25 @@ def find_percent_of_unseens(training_dict, test_dict):
     return [unseen_types_percent, unseen_tokens_percent]
 
 
-def compute_unigram_log_prob(text, corpus):
-    freq = {'<unk>': 0}
-    for word in text:
-        if word in corpus:
-            if word in freq:
-                freq[word] += 1
-            else:
-                freq[word] = 1
-        else:
-            freq['<unk>'] += 1
-    n = sum(corpus.values())
+def unigram_model(training_dictionary):
+    training_dictionary.pop('<s>', None)
+    n = sum(training_dictionary.values())
+    return {word: math.log(count/n, 2) for word, count in training_dictionary.items()}
 
-    print('The frequencies of each parameter needed to compute the probabilities are:', freq)
-    print('The total # of tokens is:', n)
+# def bigram_model(training_dictionary, text):
 
-    prob_freq = {word: count/n for word, count in freq.items()}
-    print('The probabilities (frequency/total # of tokens) are:', prob_freq)
 
-    log_freq = {word: math.log(count, 2) for word, count in prob_freq.items()}
-    print('The log (base 2) probabilities are:', log_freq)
 
-    log_prob = sum(log_freq.values())
+def compute_unigram_log_prob(text, unigram):
+    subset = {word if word in unigram else '<unk>': unigram[word if word in unigram else '<unk>'] for word in text}
+    print('The parameters required to compute the probabilities are: ', subset)
+
+    log_prob = sum(subset.values())
     print('The sum of these log probabilities (and the log probability of this text) is: ', log_prob)
 
-    avg_log_prob = log_prob/n
+    m = len(text)
+    avg_log_prob = log_prob/m
     print('The average log probability for this text is: ', avg_log_prob)
 
     perplexity = 2 ** (-avg_log_prob)
-
     print('The perplexity for this text is: ', perplexity)

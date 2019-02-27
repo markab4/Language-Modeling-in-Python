@@ -40,4 +40,4 @@ def preprocess(file_to_read, file_to_write, training_corpus):
     write_file.write(text)
     write_file.close()
 
-    return [original_freq, replaced_freq, text]
+    return [original_freq, replaced_freq, words]
