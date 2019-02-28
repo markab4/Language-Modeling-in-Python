@@ -6,6 +6,8 @@ from modelling import *
 [l_test_frequency_before_unk, l_test_frequency, learner_test_text] = preprocess("learner-test.txt", "learner-test-PP.txt", train_frequency)
 
 unigram = unigram_model(train_frequency)
+bigram = bigram_model(train_frequency, train_text)
+print(train_frequency)
 
 # 1
 print("Question 1: Number of word types in training corpus, including padding symbols and the unknown token:",

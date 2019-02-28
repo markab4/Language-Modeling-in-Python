@@ -27,7 +27,7 @@ sentences = ["He was laughed off the screen . ",
 #     compute_unigram_log_prob(padded_text, train_with_PP)
 #
 
-unigram = unigram_model(train_with_PP)
-padded_text = pad_and_lowercase([sentences[0]])
-print(padded_text)
-compute_unigram_log_prob(padded_text, unigram)
+bigram = bigram_model(train_with_PP, text)
+# padded_text = pad_and_lowercase([sentences[0]])
+# print(padded_text)
+# compute_unigram_log_prob(padded_text, unigram)

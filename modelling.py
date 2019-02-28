@@ -21,12 +21,22 @@ def find_percent_of_unseens(training_dict, test_dict):
 
 
 def unigram_model(training_dictionary):
-    training_dictionary.pop('<s>', None)
-    n = sum(training_dictionary.values())
-    return {word: math.log(count/n, 2) for word, count in training_dictionary.items()}
+    unigram = dict(training_dictionary)
+    unigram.pop('<s>', None)
+    n = sum(unigram.values())
+    return {word: math.log(count/n, 2) for word, count in unigram.items()}
 
-# def bigram_model(training_dictionary, text):
 
+def bigram_model(frequency, text):  # WordFrequency[token[i]][token[i+1]] += 1
+    bigram = {}
+    for i in range(len(text[:-1])):         # goes from index 0 to second to last element
+        if text[i] not in bigram:           # if bigram has doesnt have the key of the first word
+            bigram[text[i]] = {}                    # initialize the dictionary
+        if text[i+1] in bigram[text[i]]:    # if word i has key word i + 1
+            bigram[text[i]][text[i+1]] += 1 / frequency[text[i]]
+        else:
+            bigram[text[i]][text[i + 1]] = 1 / frequency[text[i]]
+    return bigram
 
 
 def compute_unigram_log_prob(text, unigram):
