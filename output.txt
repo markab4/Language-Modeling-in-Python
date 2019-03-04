@@ -15,3 +15,10 @@ Percentage of bigram types in Brown test corpus that did not occur in training:	
 Percentage of bigram tokens in Brown test corpus that did not occur in training:	21.64497488794081%
 Percentage of bigram types in Learner test corpus that did not occur in training:	38.63540346430081%
 Percentage of bigram tokens in Learner test corpus that did not occur in training:	23.492201984949286%
+
+Question 5:
+
+Unigram log probabilities:
+For the sentence "He was laughed off the screen . ": 
+For the sentence "There was no compulsion behind them . ": 
+For the sentence "I look forward to hearing your reply . ": 

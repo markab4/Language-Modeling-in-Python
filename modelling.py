@@ -48,10 +48,9 @@ def find_percent_of_unseen_bigrams(test_frequency, bigram, text):
     unseen_types = {}
     seen_types = {}
     sum_of_unseen_tokens = 0
-    number_of_tokens_in_test = 0
+    number_of_tokens_in_test = len(text) - 1
 
     for i in range(len(text)-1):
-        number_of_tokens_in_test += 1
         if bigram[text[i]][text[i+1]] == 0:
             sum_of_unseen_tokens += 1
             if text[i] not in unseen_types:      # if bigram has doesnt have the key of the first word
@@ -74,18 +73,21 @@ def find_percent_of_unseen_bigrams(test_frequency, bigram, text):
 
 
 def compute_unigram_log_prob(text, unigram):
+    computation = ""
     subset = {word if word in unigram else '<unk>': unigram[word if word in unigram else '<unk>'] for word in text}
-    print('The parameters required to compute the probabilities are:', subset)
+    computation += '\nThe parameters required to compute the probabilities are:' + str(subset)
 
     log_prob = {word: math.log(count, 2) for word, count in unigram.items()}
-    print('The log base 2 of each of these probabilities is:', log_prob)
+    computation += '\nThe log base 2 of each of these probabilities is:' + str(log_prob)
 
     sum_log_prob = sum(subset.values())
-    print('The sum of these log probabilities (and the log probability of this text) is:', sum_log_prob)
+    computation += '\nThe sum of these log probabilities (and the log probability of this text) is:' + str(sum_log_prob)
 
     m = len(text)
     avg_log_prob = sum_log_prob/m
-    print('The average log probability for this text is: ', avg_log_prob)
+    computation += '\nThe average log probability for this text is: ' + str(avg_log_prob)
 
     perplexity = 2 ** (-avg_log_prob)
-    print('The perplexity for this text is: ', perplexity)
+    computation += '\nThe perplexity for this text is: ' + str(perplexity)
+
+    return computation

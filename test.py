@@ -13,24 +13,23 @@ from modelling import *
 # print("Total number word tokens in training corpus: " + str(sum(train_with_PP.values())))
 #
 
+unigram = unigram_model(train_with_PP)
+# bigram_MLE = bigram_model(train_with_PP, train_text, False)
+# bigram_add1 = bigram_model(train_with_PP, train_text, True)
 
 sentences = ["He was laughed off the screen . ",
              "There was no compulsion behind them . ",
              "I look forward to hearing your reply . "]
-#
-# for sentence in sentences:
-#     print('For the sentence "' + sentence + '": ')
-#     padded_text = pad_and_lowercase([sentence])
-#     compute_unigram_log_prob(padded_text, train_with_PP)
-#
-unigram = unigram_model(train_with_PP)
-bigram_MLE = bigram_model(train_with_PP, train_text, False)
-bigram_add1 = bigram_model(train_with_PP, train_text, True)
 
-[unseen_types_percent, unseen_tokens_percent] = find_percent_of_unseen_bigrams(test_with_PP, bigram_MLE, test_text)
-
-print('unseen types percent', unseen_types_percent)
-print('unseen tokens percent', unseen_tokens_percent)
+for sentence in sentences:
+    print('For the sentence "' + sentence + '": ')
+    padded_text = pad_and_lowercase([sentence])
+    print(compute_unigram_log_prob(padded_text, unigram))
+#
+# [unseen_types_percent, unseen_tokens_percent] = find_percent_of_unseen_bigrams(test_with_PP, bigram_MLE, test_text)
+#
+# print('unseen types percent', unseen_types_percent)
+# print('unseen tokens percent', unseen_tokens_percent)
 
 # print('unseen tokens percent', unseen_tokens_percent)
 # padded_text = pad_and_lowercase([sentences[0]])

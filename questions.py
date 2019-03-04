@@ -64,20 +64,23 @@ output.write("Percentage of bigram tokens in Learner test corpus that did not oc
 output.write("\nQuestion 5:\n")
 #     Compute the log probabilities of the following sentences under the three models
 #     (ignore capitalization and pad each sentence as described above).
-#     Please list all of the parameters required to compute the probabilities and show the complete calculation.
+
+#     List all of the parameters required to compute the probabilities and show the complete calculation.
+
 #     Which of the parameters have zero values under each model? Use log base 2 in your calculations.
 #     Map words not observed in the training corpus to the <unk> token.
 
-# sentences = ["He was laughed off the screen . ",
-#              "There was no compulsion behind them . ",
-#              "I look forward to hearing your reply . "]
-#
-# for sentence in sentences:
-#     output.write('For the sentence "' + sentence + '": \n')
-#     padded_text = pad_and_lowercase([sentence])
-#     compute_unigram_log_prob(padded_text, train_frequency)
-#
-# # compute_unigram_log_prob([learner_test_text], train_unigram_with_PP)
+sentences = ["He was laughed off the screen . ",
+             "There was no compulsion behind them . ",
+             "I look forward to hearing your reply . "]
+
+output.write("\nUnigram log probabilities:\n")
+for sentence in sentences:
+    output.write('For the sentence "' + sentence + '": \n')
+    padded_text = pad_and_lowercase([sentence])
+    compute_unigram_log_prob(padded_text, unigram)
+
+# compute_unigram_log_prob([learner_test_text], train_unigram_with_PP)
 
 
 output.close()
