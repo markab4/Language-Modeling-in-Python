@@ -60,13 +60,14 @@ output.write("Percentage of bigram types in Learner test corpus that did not occ
 output.write("Percentage of bigram tokens in Learner test corpus that did not occur in training:\t" +
              str(unseen_bigrams_in_learners[1]) + '%\n')
 
-# output.write("Question 5A: ")
-# # 5   Compute the log probabilities of the following sentences under the three models
-# #     (ignore capitalization and pad each sentence as described above).
-# #     Please list all of the parameters required to compute the probabilities and show the complete calculation.
-# #     Which of the parameters have zero values under each model? Use log base 2 in your calculations.
-# #     Map words not observed in the training corpus to the <unk> token.
-#
+#5
+output.write("\nQuestion 5:\n")
+#     Compute the log probabilities of the following sentences under the three models
+#     (ignore capitalization and pad each sentence as described above).
+#     Please list all of the parameters required to compute the probabilities and show the complete calculation.
+#     Which of the parameters have zero values under each model? Use log base 2 in your calculations.
+#     Map words not observed in the training corpus to the <unk> token.
+
 # sentences = ["He was laughed off the screen . ",
 #              "There was no compulsion behind them . ",
 #              "I look forward to hearing your reply . "]

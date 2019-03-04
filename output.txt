@@ -11,7 +11,7 @@ Percentage of word types in Learner test corpus that did not occur in training:	
 Percentage of word tokens in Learner test corpus that did not occur in training:	5.04907306434024%
 
 Question 4:
-Percentage of bigram types in Brown test corpus that did not occur in training:	0.05152854622509855%
-Percentage of bigram tokens in Brown test corpus that did not occur in training:	21.643806026568743%
-Percentage of bigram types in Learner test corpus that did not occur in training:	0.1409828407926797%
-Percentage of bigram tokens in Learner test corpus that did not occur in training:	23.489640130861506%
+Percentage of bigram types in Brown test corpus that did not occur in training:	38.513919487282195%
+Percentage of bigram tokens in Brown test corpus that did not occur in training:	21.64497488794081%
+Percentage of bigram types in Learner test corpus that did not occur in training:	38.63540346430081%
+Percentage of bigram tokens in Learner test corpus that did not occur in training:	23.492201984949286%
