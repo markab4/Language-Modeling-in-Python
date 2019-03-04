@@ -54,9 +54,8 @@ def find_percent_of_unseen_bigrams(frequency, bigram, text):
         if bigram[text[i]][text[i+1]] == 0:
             sum_of_unseen_tokens += 1
             if text[i] not in test_bigram:           # if bigram has doesnt have the key of the first word
-                test_bigram[text[i]] = set(text[i+1])
-            else:
-                test_bigram[text[i]].add(text[i+1])
+                test_bigram[text[i]] = set()
+            test_bigram[text[i]].add(text[i+1])
     counts = {w1: len(w2) for w1, w2 in test_bigram.items()}
     number_of_unseen_types = sum(counts.values())
 
