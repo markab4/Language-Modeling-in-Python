@@ -27,7 +27,7 @@ unigram = unigram_model(train_with_PP)
 bigram_MLE = bigram_model(train_with_PP, train_text, False)
 bigram_add1 = bigram_model(train_with_PP, train_text, True)
 
-[unseen_types_percent, unseen_tokens_percent] = find_percent_of_unseen_bigrams(train_with_PP, bigram_MLE, test_text)
+[unseen_types_percent, unseen_tokens_percent] = find_percent_of_unseen_bigrams(test_with_PP, bigram_MLE, test_text)
 
 print('unseen types percent', unseen_types_percent)
 print('unseen tokens percent', unseen_tokens_percent)

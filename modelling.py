@@ -44,16 +44,17 @@ def find_percent_of_unseen_words(training_dict, test_dict):
 
 #  What percentage of bigrams (bigram types and bigram tokens) in each of the test corpora
 #  did not occur in training (treat <unk> as a token that has been observed).
-def find_percent_of_unseen_bigrams(frequency, bigram, text):
+def find_percent_of_unseen_bigrams(test_frequency, bigram, text):
     test_bigram = {}
     sum_of_unseen_tokens = 0
-    number_of_tokens_in_test = sum(frequency.values())
-    number_of_types_in_test = len(frequency) ** 2
+    number_of_tokens_in_test = 0
+    number_of_types_in_test = len(test_frequency) ** 2
 
-    for i in range(len(text)-1):         # goes from index 0 to second to last element
+    for i in range(len(text)-1):
+        number_of_tokens_in_test += 1
         if bigram[text[i]][text[i+1]] == 0:
             sum_of_unseen_tokens += 1
-            if text[i] not in test_bigram:           # if bigram has doesnt have the key of the first word
+            if text[i] not in test_bigram:      # if bigram has doesnt have the key of the first word
                 test_bigram[text[i]] = set()
             test_bigram[text[i]].add(text[i+1])
     counts = {w1: len(w2) for w1, w2 in test_bigram.items()}
