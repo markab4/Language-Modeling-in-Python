@@ -17,42 +17,50 @@ unigram = unigram_model(train_frequency)
 bigram_MLE = bigram_model(train_frequency, train_text, False)
 bigram_add1 = bigram_model(train_frequency, train_text, True)
 
+
+output = open("output.txt", "w")
+
 # 1
-print("Question 1: Number of word types in training corpus, including padding symbols and the unknown token:",
-      len(train_frequency))
+
+output.write("Question 1: \n"
+             "Number of word types in training corpus, including padding symbols and the unknown token: \t" +
+             str(len(train_frequency)) + '\n')
 
 # 2
-print("Question 2: Total number of word tokens in training corpus:", (sum(train_frequency.values())))
+output.write("\nQuestion 2: \n"
+             "Total number of word tokens in training corpus: \t" +
+             str(sum(train_frequency.values())) + '\n')
 
 # 3   Prior to mapping unknown words to <unk> in training and test data
-print("Question 3: ")
+output.write("\nQuestion 3:\n")
+
 unseen_words_in_brown = find_percent_of_unseen_words(train_frequency_before_unk, b_test_frequency_before_unk)
 unseen_words_in_learners = find_percent_of_unseen_words(train_frequency_before_unk, l_test_frequency_before_unk)
 
-print("Percentage of word types in Brown test corpus that did not occur in training: ",
-      unseen_words_in_brown[0], '%')
-print("Percentage of word tokens in Brown test corpus that did not occur in training: ",
-      unseen_words_in_brown[1], '%')
-print("Percentage of word types in Learner test corpus that did not occur in training: ",
-      unseen_words_in_learners[0], '%')
-print("Percentage of word tokens in Learner test corpus that did not occur in training: ",
-      unseen_words_in_learners[1], '%')
+output.write("Percentage of word types in Brown test corpus that did not occur in training:\t" +
+             str(unseen_words_in_brown[0]) + '%\n')
+output.write("Percentage of word tokens in Brown test corpus that did not occur in training:\t" +
+             str(unseen_words_in_brown[1]) + '%\n')
+output.write("Percentage of word types in Learner test corpus that did not occur in training:\t" +
+             str(unseen_words_in_learners[0]) + '%\n')
+output.write("Percentage of word tokens in Learner test corpus that did not occur in training:\t" +
+             str(unseen_words_in_learners[1]) + '%\n')
 
 # 4
-print("Question 4: ")
-unseen_bigrams_in_brown = find_percent_of_unseen_bigrams(bigram_MLE, brown_test_text)
-unseen_bigrams_in_learners = find_percent_of_unseen_bigrams(bigram_MLE, learner_test_text)
+output.write("\nQuestion 4:\n")
+unseen_bigrams_in_brown = find_percent_of_unseen_bigrams(b_test_frequency, bigram_MLE, brown_test_text)
+unseen_bigrams_in_learners = find_percent_of_unseen_bigrams(l_test_frequency, bigram_MLE, learner_test_text)
 
-print("Percentage of bigram types in Brown test corpus that did not occur in training: ",
-      unseen_bigrams_in_brown[0], '%')
-print("Percentage of bigram tokens in Brown test corpus that did not occur in training: ",
-      unseen_bigrams_in_brown[1], '%')
-print("Percentage of bigram types in Learner test corpus that did not occur in training: ",
-      unseen_bigrams_in_learners[0], '%')
-print("Percentage of bigram tokens in Learner test corpus that did not occur in training: ",
-      unseen_bigrams_in_learners[1], '%')
+output.write("Percentage of bigram types in Brown test corpus that did not occur in training:\t" +
+             str(unseen_bigrams_in_brown[0]) + '%\n')
+output.write("Percentage of bigram tokens in Brown test corpus that did not occur in training:\t" +
+             str(unseen_bigrams_in_brown[1]) + '%\n')
+output.write("Percentage of bigram types in Learner test corpus that did not occur in training:\t" +
+             str(unseen_bigrams_in_learners[0]) + '%\n')
+output.write("Percentage of bigram tokens in Learner test corpus that did not occur in training:\t" +
+             str(unseen_bigrams_in_learners[1]) + '%\n')
 
-# print("Question 5A: ")
+# output.write("Question 5A: ")
 # # 5   Compute the log probabilities of the following sentences under the three models
 # #     (ignore capitalization and pad each sentence as described above).
 # #     Please list all of the parameters required to compute the probabilities and show the complete calculation.
@@ -64,8 +72,11 @@ print("Percentage of bigram tokens in Learner test corpus that did not occur in 
 #              "I look forward to hearing your reply . "]
 #
 # for sentence in sentences:
-#     print('For the sentence "' + sentence + '": ')
+#     output.write('For the sentence "' + sentence + '": \n')
 #     padded_text = pad_and_lowercase([sentence])
 #     compute_unigram_log_prob(padded_text, train_frequency)
 #
 # # compute_unigram_log_prob([learner_test_text], train_unigram_with_PP)
+
+
+output.close()

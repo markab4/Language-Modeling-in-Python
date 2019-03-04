@@ -1,0 +1,17 @@
+Question 1: 
+Number of word types in training corpus, including padding symbols and the unknown token: 	15031
+
+Question 2: 
+Total number of word tokens in training corpus: 	498474
+
+Question 3:
+Percentage of word types in Brown test corpus that did not occur in training:	22.759315206445116%
+Percentage of word tokens in Brown test corpus that did not occur in training:	5.994167836699427%
+Percentage of word types in Learner test corpus that did not occur in training:	16.348195329087048%
+Percentage of word tokens in Learner test corpus that did not occur in training:	5.04907306434024%
+
+Question 4:
+Percentage of bigram types in Brown test corpus that did not occur in training:	0.05152854622509855%
+Percentage of bigram tokens in Brown test corpus that did not occur in training:	21.643806026568743%
+Percentage of bigram types in Learner test corpus that did not occur in training:	0.1409828407926797%
+Percentage of bigram tokens in Learner test corpus that did not occur in training:	23.489640130861506%
