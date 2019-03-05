@@ -170,5 +170,40 @@ def compute_bigram_add1_log_prob(sentence, bigram):
 
     perplexity = 2 ** (-avg_log_prob)
     computation += '\nThe perplexity for this text is:\t' + str(perplexity) + '\n'
-
     return computation
+
+
+def compute_unigram_perplexity(corpus, unigram):
+    subset = {word: unigram[word] for word in corpus if word != "<s>"}
+    log_prob = {word: math.log(count, 2) for word, count in subset.items()}
+    sum_log_prob = 0
+    for word in corpus:
+        if word != "<s>":
+            sum_log_prob += log_prob[word]
+    m = sum(subset.values())
+    avg_log_prob = sum_log_prob/m
+    return 2 ** (-avg_log_prob)
+
+
+def compute_bigram_perplexity(corpus, bigram):
+    subset = set()
+    sum_log_prob = 0
+    has_zero = False
+    for i in range(len(corpus)-1):
+        subset.add((corpus[i], corpus[i+1], bigram[corpus[i]][corpus[i+1]]))
+        if bigram[corpus[i]][corpus[i+1]] == 0:
+            has_zero = True
+        else:
+            sum_log_prob += math.log(bigram[corpus[i]][corpus[i+1]], 2)
+
+    if has_zero:
+        perplexity = "undefined"
+    else:
+        log_prob = set()
+        for bigram in subset:
+            log_prob.add((bigram[0], bigram[1], math.log(bigram[2], 2)))
+        m = len(corpus)
+        avg_log_prob = sum_log_prob / m
+        perplexity = 2 ** (-avg_log_prob)
+    return perplexity
+

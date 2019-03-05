@@ -14,18 +14,19 @@ from modelling import *
 #
 
 unigram = unigram_model(train_with_PP)
-bigram_MLE = bigram_model(train_with_PP, train_text, False)
-bigram_add1 = bigram_model(train_with_PP, train_text, True)
+# bigram_MLE = bigram_model(train_with_PP, train_text, False)
+# bigram_add1 = bigram_model(train_with_PP, train_text, True)
+#
+# sentences = ["He was laughed off the screen . ",
+#              "There was no compulsion behind them . ",
+#              "I look forward to hearing your reply . "]
+#
+# for sentence in sentences:
+#     print('For the sentence "' + str(sentence) + '": \n')
+#     print(compute_unigram_log_prob(sentence, unigram))
+#     print(compute_bigram_MLE_log_prob(sentence, bigram_MLE))
+#     print(compute_bigram_add1_log_prob(sentence, bigram_add1))
 
-sentences = ["He was laughed off the screen . ",
-             "There was no compulsion behind them . ",
-             "I look forward to hearing your reply . "]
-
-for sentence in sentences:
-    print('For the sentence "' + str(sentence) + '": \n')
-    print(compute_unigram_log_prob(sentence, unigram))
-    print(compute_bigram_MLE_log_prob(sentence, bigram_MLE))
-    print(compute_bigram_add1_log_prob(sentence, bigram_add1))
 
 #
 # [unseen_types_percent, unseen_tokens_percent] = find_percent_of_unseen_bigrams(test_with_PP, bigram_MLE, test_text)

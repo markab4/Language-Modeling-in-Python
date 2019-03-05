@@ -58,3 +58,4 @@ def pretty_bigram(bigram):
     for tup in bigram:
         pretty += '"' + str(tup[0]) + " " + str(tup[1]) + '" : ' + str(tup[2]) + '\n'
     return pretty
+
