@@ -49,5 +49,4 @@ calculations. Map words not observed in the training corpus to the <unk> token.
     - I look forward to hearing your reply .
 6. Compute the perplexities of each of the sentences above under each of the models.
 7. Compute the perplexities of the entire test corpora, separately for the _brown-test.txt_
-and _learner-test.txt_ under each of the models. Discuss the differences in the results you
-obtained.
+and _learner-test.txt_ under each of the models. 
