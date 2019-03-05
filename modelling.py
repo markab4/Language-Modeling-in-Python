@@ -18,9 +18,9 @@ def bigram_model(frequency, text, add_one):
     for word in bigram:
         bigram[word] = dict(bucket)
     for i in range(len(text)-1):         # goes from index 0 to second to last element
-        bigram[text[i]][text[i + 1]] += 1 / (frequency[text[i]] + (vocabulary if add_one else 0))
-    # for bucket in bigram:
-    #     bigram[bucket] = {word: math.log(count, 2) for word, count in bigram[bucket].items()}
+        bigram[text[i]][text[i + 1]] += 1
+    for bucket in bigram:
+        bigram[bucket] = {word: count/(frequency[bucket] + (vocabulary if add_one else 0)) for word, count in bigram[bucket].items()}
     return bigram
 
 
@@ -76,6 +76,7 @@ def compute_unigram_log_prob(sentence, unigram):
     computation = '\nIn the Unigram Model: \n'
     text = (sentence.lower() + " </s> ").split()
     replace_unseens_with_unk(text, unigram)
+    computation += "The sentence gets mapped to " + str(text) + '\n'
 
     subset = {word: unigram[word] for word in text}
     computation += 'The parameters required to compute the probabilities are:\n' + pretty_dict(subset)
@@ -104,14 +105,41 @@ def compute_bigram_MLE_log_prob(sentence, bigram):
     computation = '\nIn the Bigram MLE Model: \n'
     text = pad_and_lowercase([sentence])
     replace_unseens_with_unk(text, bigram)
+    computation += "The sentence gets mapped to " + str(text) + '\n'
     subset = set()
+    sum_log_prob = 0
+    has_zero = False
     for i in range(len(text)-1):
         subset.add((text[i], text[i+1], bigram[text[i]][text[i+1]]))
-    computation += "The following parameters need to be computed:\n" + pretty_bigram(subset) + \
-                   "\nThe log probability is undefined due to the following unseen bigrams:\n"
-    for tup in subset:
-        if tup[2] == 0:
-            computation += '"' + str(tup[0]) + " " + str(tup[1]) + '"\n'
+        if bigram[text[i]][text[i+1]] == 0:
+            has_zero = True
+        else:
+            sum_log_prob += math.log(bigram[text[i]][text[i+1]], 2)
+
+    if has_zero:
+        computation += "The following parameters need to be computed:\n" + pretty_bigram(subset) + \
+                       "\nThe log probability is undefined due to the following unseen bigrams:\n"
+        for tup in subset:
+            if tup[2] == 0:
+                computation += '"' + str(tup[0]) + " " + str(tup[1]) + '"\n'
+
+    else:
+        computation += "The following parameters need to be computed:\n"
+        log_prob = set()
+        for bigram in subset:
+            computation += '"' + str(bigram[0]) + " " + str(bigram[1]) + '" : ' + str(bigram[2]) + '\n'
+            log_prob.add((bigram[0], bigram[1], math.log(bigram[2], 2)))
+
+        computation += '\nThe log base 2 of each of these probabilities is:\n' + pretty_bigram(log_prob) + \
+                       '\nThe sum of the log probabilities (and the log probability of this text) is:\t' + \
+                       str(sum_log_prob)
+
+        m = len(text)
+        avg_log_prob = sum_log_prob / m
+        computation += '\nThe average log probability for this text is:\t' + str(avg_log_prob)
+
+        perplexity = 2 ** (-avg_log_prob)
+        computation += '\nThe perplexity for this text is:\t' + str(perplexity) + '\n'
     return computation
 
 
@@ -119,6 +147,7 @@ def compute_bigram_add1_log_prob(sentence, bigram):
     computation = '\nIn the Bigram Add-One Model: \n'
     text = pad_and_lowercase([sentence])
     replace_unseens_with_unk(text, bigram)
+    computation += "The sentence gets mapped to " + str(text) + '\n'
     subset = set()
     sum_log_prob = 0
     for i in range(len(text)-1):

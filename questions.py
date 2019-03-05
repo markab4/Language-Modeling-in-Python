@@ -59,7 +59,7 @@ output.write("Percentage of bigram types in Learner test corpus that did not occ
 output.write("Percentage of bigram tokens in Learner test corpus that did not occur in training:\t" +
              str(unseen_bigrams_in_learners[1]) + '%\n')
 
-#5
+#5 and #6
 output.write("\nQuestions 5 and 6:\n")
 #     Compute the log probabilities of the following sentences under the three models
 #     (ignore capitalization and pad each sentence as described above).
