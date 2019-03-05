@@ -82,17 +82,17 @@ for sentence in sentences:
 # 7 Compute the perplexities of the entire test corpora, separately for the brown-test.txt and learner-test.txt
 # under each of the models. Discuss the differences in the results you obtained.
 output.write("\nQuestion 7:\n")
-output.write('The perplexity of the Brown test corpus under Unigram modelling is: ' +
+output.write('\nThe perplexity of the Brown test corpus under Unigram modelling is:\t' +
              str(compute_unigram_perplexity(brown_test_text, unigram)))
-output.write('The perplexity of the Learner test corpus under Unigram modelling is: ' +
+output.write('\nThe perplexity of the Learner test corpus under Unigram modelling is:\t' +
              str(compute_unigram_perplexity(learner_test_text, unigram)))
-output.write('The perplexity of the Brown test corpus under Bigram MLE modelling is: ' +
+output.write('\nThe perplexity of the Brown test corpus under Bigram MLE modelling is:\t' +
              str(compute_bigram_perplexity(brown_test_text, bigram_MLE)))
-output.write('The perplexity of the Learner test corpus under Bigram MLE modelling is: ' +
+output.write('\nThe perplexity of the Learner test corpus under Bigram MLE modelling is:\t' +
              compute_bigram_perplexity(learner_test_text, bigram_MLE))
-output.write('The perplexity of the Brown test corpus under Bigram Add-One modelling is: ' +
+output.write('\nThe perplexity of the Brown test corpus under Bigram Add-One modelling is:\t' +
              str(compute_bigram_perplexity(brown_test_text, bigram_add1)))
-output.write('The perplexity of the Learner test corpus under Bigram Add-One modelling is: ' +
+output.write('\nThe perplexity of the Learner test corpus under Bigram Add-One modelling is:\t' +
              str(compute_bigram_perplexity(learner_test_text, bigram_add1)))
 
 

@@ -21,6 +21,7 @@ Questions 5 and 6:
 For the sentence "He was laughed off the screen . ": 
 
 In the Unigram Model: 
+The sentence gets mapped to ['he', 'was', 'laughed', 'off', 'the', 'screen', '.', '</s>']
 The parameters required to compute the probabilities are:
 "he" : 0.012608101186520317
 "was" : 0.010897954173139686
@@ -46,41 +47,43 @@ The average log probability for this text is:	-8.03095954967799
 The perplexity for this text is:	261.55300764185296
 
 In the Bigram MLE Model: 
+The sentence gets mapped to ['<s>', 'he', 'was', 'laughed', 'off', 'the', 'screen', '.', '</s>']
 The following parameters need to be computed:
-"he was" : 0.11616585529629007
-". </s>" : 1.0
-"screen ." : 0.0
-"<s> he" : 0.08203846153846153
-"was laughed" : 0.0
 "laughed off" : 0.0
-"the screen" : 0.00012166930283489475
+". </s>" : 1.0
+"he was" : 0.11616585529629007
 "off the" : 0.1865671641791045
+"<s> he" : 0.08203846153846153
+"the screen" : 0.00012166930283489475
+"was laughed" : 0.0
+"screen ." : 0.0
 
 The log probability is undefined due to the following unseen bigrams:
-"screen ."
-"was laughed"
 "laughed off"
+"was laughed"
+"screen ."
 
 In the Bigram Add-One Model: 
+The sentence gets mapped to ['<s>', 'he', 'was', 'laughed', 'off', 'the', 'screen', '.', '</s>']
 The following parameters need to be computed:
-"the screen" : 0.00010078613182826043
-"off the" : 0.004924512408475345
-"he was" : 0.0330188679245283
-"laughed off" : 6.633939233116624e-05
-"screen ." : 6.646284726837697e-05
-"<s> he" : 0.05200945626477541
 ". </s>" : 0.5967157691378894
+"laughed off" : 6.633939233116624e-05
+"the screen" : 0.00010078613182826043
+"<s> he" : 0.05200945626477541
 "was laughed" : 4.955401387512388e-05
+"screen ." : 6.646284726837697e-05
+"he was" : 0.0330188679245283
+"off the" : 0.004924512408475345
 
 The log base 2 of each of these probabilities is:
-"<s> he" : -4.2650822344826524
-"he was" : -4.920565532505595
-"screen ." : -13.877092375027415
-"was laughed" : -14.300638553993721
-"the screen" : -13.276415241892678
-"off the" : -7.665803398813612
-"laughed off" : -13.879774677336927
 ". </s>" : -0.7448841920410941
+"off the" : -7.665803398813612
+"screen ." : -13.877092375027415
+"the screen" : -13.276415241892678
+"<s> he" : -4.2650822344826524
+"laughed off" : -13.879774677336927
+"was laughed" : -14.300638553993721
+"he was" : -4.920565532505595
 
 The sum of the log probabilities (and the log probability of this text) is:	-72.9302562060937
 The average log probability for this text is:	-8.103361800677078
@@ -89,6 +92,7 @@ The perplexity for this text is:	275.01410443241207
 For the sentence "There was no compulsion behind them . ": 
 
 In the Unigram Model: 
+The sentence gets mapped to ['there', 'was', 'no', '<unk>', 'behind', 'them', '.', '</s>']
 The parameters required to compute the probabilities are:
 "there" : 0.002630832596079361
 "was" : 0.010897954173139686
@@ -114,38 +118,52 @@ The average log probability for this text is:	-7.298594497933309
 The perplexity for this text is:	157.43303579387805
 
 In the Bigram MLE Model: 
+The sentence gets mapped to ['<s>', 'there', 'was', 'no', '<unk>', 'behind', 'them', '.', '</s>']
 The following parameters need to be computed:
-". </s>" : 1.0
-"there was" : 0.3065164923572003
 "was no" : 0.023305496212856866
-"behind them" : 0.060240963855421686
-"<s> there" : 0.014576923076923078
-"<unk> behind" : 0.0003782434374763598
-"them ." : 0.1687192118226601
 "no <unk>" : 0.027054108216432865
-
-The log probability is undefined due to the following unseen bigrams:
-
-In the Bigram Add-One Model: 
-The following parameters need to be computed:
-"behind them" : 0.0007238270711324604
-"was no" : 0.0059960356788899905
-"<s> there" : 0.009261290243961882
-"them ." : 0.008710471501609543
-"<unk> behind" : 0.00021238938053097346
-"there was" : 0.023473024456187784
-". </s>" : 0.5967157691378894
-"no <unk>" : 0.0017468338636221848
+". </s>" : 1.0
+"them ." : 0.1687192118226601
+"<unk> behind" : 0.0003782434374763598
+"<s> there" : 0.014576923076923078
+"there was" : 0.3065164923572003
+"behind them" : 0.060240963855421686
 
 The log base 2 of each of these probabilities is:
-"<s> there" : -6.754571086976131
-"was no" : -7.381775316719125
-"behind them" : -10.432067314035452
+"<s> there" : -6.100169964632088
+". </s>" : 0.0
+"there was" : -1.7059633935591632
+"<unk> behind" : -11.368397327649257
+"no <unk>" : -5.208008503173793
+"them ." : -2.5673038342246497
+"behind them" : -4.053111336459563
+"was no" : -5.423185959188939
+
+The sum of the log probabilities (and the log probability of this text) is:	-36.42614031888746
+The average log probability for this text is:	-4.047348924320829
+The perplexity for this text is:	16.53382852354821
+
+In the Bigram Add-One Model: 
+The sentence gets mapped to ['<s>', 'there', 'was', 'no', '<unk>', 'behind', 'them', '.', '</s>']
+The following parameters need to be computed:
+"was no" : 0.0059960356788899905
+". </s>" : 0.5967157691378894
+"no <unk>" : 0.0017468338636221848
+"there was" : 0.023473024456187784
+"<s> there" : 0.009261290243961882
+"<unk> behind" : 0.00021238938053097346
+"them ." : 0.008710471501609543
+"behind them" : 0.0007238270711324604
+
+The log base 2 of each of these probabilities is:
 "them ." : -6.843033470014426
-"there was" : -5.412852447324573
-"<unk> behind" : -12.201000746356119
 ". </s>" : -0.7448841920410941
+"there was" : -5.412852447324573
+"was no" : -7.381775316719125
 "no <unk>" : -9.161041880486328
+"behind them" : -10.432067314035452
+"<unk> behind" : -12.201000746356119
+"<s> there" : -6.754571086976131
 
 The sum of the log probabilities (and the log probability of this text) is:	-58.93122645395324
 The average log probability for this text is:	-6.54791405043925
@@ -154,6 +172,7 @@ The perplexity for this text is:	93.56610226591661
 For the sentence "I look forward to hearing your reply . ": 
 
 In the Unigram Model: 
+The sentence gets mapped to ['i', 'look', 'forward', 'to', 'hearing', 'your', 'reply', '.', '</s>']
 The parameters required to compute the probabilities are:
 "i" : 0.006846937609265272
 "look" : 0.0004889157921917396
@@ -181,45 +200,46 @@ The average log probability for this text is:	-9.326063756060998
 The perplexity for this text is:	641.8372701258673
 
 In the Bigram MLE Model: 
+The sentence gets mapped to ['<s>', 'i', 'look', 'forward', 'to', 'hearing', 'your', 'reply', '.', '</s>']
 The following parameters need to be computed:
-". </s>" : 1.0
-"look forward" : 0.017316017316017316
-"forward to" : 0.2765957446808511
-"i look" : 0.0003091190108191654
-"hearing your" : 0.0
-"reply ." : 0.20689655172413793
-"to hearing" : 0.0
-"<s> i" : 0.03523076923076923
 "your reply" : 0.0027247956403269754
+"reply ." : 0.20689655172413793
+"i look" : 0.0003091190108191654
+"to hearing" : 0.0
+"forward to" : 0.2765957446808511
+"look forward" : 0.017316017316017316
+"<s> i" : 0.03523076923076923
+". </s>" : 1.0
+"hearing your" : 0.0
 
 The log probability is undefined due to the following unseen bigrams:
-"hearing your"
 "to hearing"
+"hearing your"
 
 In the Bigram Add-One Model: 
+The sentence gets mapped to ['<s>', 'i', 'look', 'forward', 'to', 'hearing', 'your', 'reply', '.', '</s>']
 The following parameters need to be computed:
-"to hearing" : 4.0290088638195005e-05
-"your reply" : 0.000129886998311469
-"reply ." : 0.0004648074369189907
-"i look" : 0.00010949304719150334
-". </s>" : 0.5967157691378894
-"hearing your" : 6.639665360865813e-05
-"<s> i" : 0.022348955667665912
-"look forward" : 0.0003276110601493906
 "forward to" : 0.0009285051067780873
+". </s>" : 0.5967157691378894
+"look forward" : 0.0003276110601493906
+"your reply" : 0.000129886998311469
+"<s> i" : 0.022348955667665912
+"to hearing" : 4.0290088638195005e-05
+"hearing your" : 6.639665360865813e-05
+"i look" : 0.00010949304719150334
+"reply ." : 0.0004648074369189907
 
 The log base 2 of each of these probabilities is:
-"hearing your" : -13.878529942862396
-"<s> i" : -5.483648771712023
-"your reply" : -12.910455355309821
-"i look" : -13.156873117949567
-"reply ." : -11.071079227501686
-"forward to" : -10.072802534544207
-"look forward" : -11.575728316363783
-"to hearing" : -14.59921549501772
 ". </s>" : -0.7448841920410941
+"your reply" : -12.910455355309821
+"to hearing" : -14.59921549501772
+"forward to" : -10.072802534544207
+"<s> i" : -5.483648771712023
+"reply ." : -11.071079227501686
+"hearing your" : -13.878529942862396
+"i look" : -13.156873117949567
+"look forward" : -11.575728316363783
 
 The sum of the log probabilities (and the log probability of this text) is:	-93.49321695330231
 The average log probability for this text is:	-9.34932169533023
 The perplexity for this text is:	652.268295379401
-

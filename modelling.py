@@ -174,13 +174,13 @@ def compute_bigram_add1_log_prob(sentence, bigram):
 
 
 def compute_unigram_perplexity(corpus, unigram):
-    subset = {word: unigram[word] for word in corpus if word != "<s>"}
-    log_prob = {word: math.log(count, 2) for word, count in subset.items()}
+    subset = {word: math.log(unigram[word], 2) for word in corpus if word != "<s>"}
     sum_log_prob = 0
+    m = 0
     for word in corpus:
         if word != "<s>":
-            sum_log_prob += log_prob[word]
-    m = sum(subset.values())
+            sum_log_prob += subset[word]
+            m += 1
     avg_log_prob = sum_log_prob/m
     return 2 ** (-avg_log_prob)
 
