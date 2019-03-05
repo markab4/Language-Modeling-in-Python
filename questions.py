@@ -1,4 +1,3 @@
-from preprocessing import *
 from modelling import *
 
 # Preprocessing
@@ -48,8 +47,8 @@ output.write("Percentage of word tokens in Learner test corpus that did not occu
 
 # 4
 output.write("\nQuestion 4:\n")
-unseen_bigrams_in_brown = find_percent_of_unseen_bigrams(b_test_frequency, bigram_MLE, brown_test_text)
-unseen_bigrams_in_learners = find_percent_of_unseen_bigrams(l_test_frequency, bigram_MLE, learner_test_text)
+unseen_bigrams_in_brown = find_percent_of_unseen_bigrams(bigram_MLE, brown_test_text)
+unseen_bigrams_in_learners = find_percent_of_unseen_bigrams(bigram_MLE, learner_test_text)
 
 output.write("Percentage of bigram types in Brown test corpus that did not occur in training:\t" +
              str(unseen_bigrams_in_brown[0]) + '%\n')
@@ -61,7 +60,7 @@ output.write("Percentage of bigram tokens in Learner test corpus that did not oc
              str(unseen_bigrams_in_learners[1]) + '%\n')
 
 #5
-output.write("\nQuestion 5:\n")
+output.write("\nQuestions 5 and 6:\n")
 #     Compute the log probabilities of the following sentences under the three models
 #     (ignore capitalization and pad each sentence as described above).
 
@@ -74,13 +73,10 @@ sentences = ["He was laughed off the screen . ",
              "There was no compulsion behind them . ",
              "I look forward to hearing your reply . "]
 
-output.write("\nUnigram log probabilities:\n")
 for sentence in sentences:
-    output.write('For the sentence "' + sentence + '": \n')
-    padded_text = pad_and_lowercase([sentence])
-    compute_unigram_log_prob(padded_text, unigram)
-
-# compute_unigram_log_prob([learner_test_text], train_unigram_with_PP)
-
+    output.write('\nFor the sentence "' + str(sentence) + '": \n')
+    output.write(compute_unigram_log_prob(sentence, unigram))
+    output.write(compute_bigram_MLE_log_prob(sentence, bigram_MLE))
+    output.write(compute_bigram_add1_log_prob(sentence, bigram_add1))
 
 output.close()

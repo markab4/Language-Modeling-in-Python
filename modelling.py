@@ -44,7 +44,7 @@ def find_percent_of_unseen_words(training_dict, test_dict):
 
 #  What percentage of bigrams (bigram types and bigram tokens) in each of the test corpora
 #  did not occur in training (treat <unk> as a token that has been observed).
-def find_percent_of_unseen_bigrams(test_frequency, bigram, text):
+def find_percent_of_unseen_bigrams(bigram, text):
     unseen_types = {}
     seen_types = {}
     sum_of_unseen_tokens = 0
@@ -72,22 +72,74 @@ def find_percent_of_unseen_bigrams(test_frequency, bigram, text):
     return [unseen_types_percent, unseen_tokens_percent]
 
 
-def compute_unigram_log_prob(text, unigram):
-    computation = ""
-    subset = {word if word in unigram else '<unk>': unigram[word if word in unigram else '<unk>'] for word in text}
-    computation += '\nThe parameters required to compute the probabilities are:' + str(subset)
+def compute_unigram_log_prob(sentence, unigram):
+    computation = '\nIn the Unigram Model: \n'
+    text = (sentence.lower() + " </s> ").split()
+    replace_unseens_with_unk(text, unigram)
 
-    log_prob = {word: math.log(count, 2) for word, count in unigram.items()}
-    computation += '\nThe log base 2 of each of these probabilities is:' + str(log_prob)
+    subset = {word: unigram[word] for word in text}
+    computation += 'The parameters required to compute the probabilities are:\n' + pretty_dict(subset)
 
-    sum_log_prob = sum(subset.values())
-    computation += '\nThe sum of these log probabilities (and the log probability of this text) is:' + str(sum_log_prob)
+    log_prob = {word: math.log(count, 2) for word, count in subset.items()}
+    computation += '\nThe log base 2 of each of these probabilities is:\n' + pretty_dict(log_prob)
+
+    sum_log_prob = 0
+    for word in text:
+        sum_log_prob += log_prob[word]
+
+    computation += '\nThe sum of the log probabilities (and the log probability of this text) is:\t' + \
+                   str(sum_log_prob)
 
     m = len(text)
     avg_log_prob = sum_log_prob/m
-    computation += '\nThe average log probability for this text is: ' + str(avg_log_prob)
+    computation += '\nThe average log probability for this text is:\t' + str(avg_log_prob)
 
     perplexity = 2 ** (-avg_log_prob)
-    computation += '\nThe perplexity for this text is: ' + str(perplexity)
+    computation += '\nThe perplexity for this text is:\t' + str(perplexity) + '\n'
+
+    return computation
+
+
+def compute_bigram_MLE_log_prob(sentence, bigram):
+    computation = '\nIn the Bigram MLE Model: \n'
+    text = pad_and_lowercase([sentence])
+    replace_unseens_with_unk(text, bigram)
+    subset = set()
+    for i in range(len(text)-1):
+        subset.add((text[i], text[i+1], bigram[text[i]][text[i+1]]))
+    computation += "The following parameters need to be computed:\n" + pretty_bigram(subset) + \
+                   "\nThe log probability is undefined due to the following unseen bigrams:\n"
+    for tup in subset:
+        if tup[2] == 0:
+            computation += '"' + str(tup[0]) + " " + str(tup[1]) + '"\n'
+    return computation
+
+
+def compute_bigram_add1_log_prob(sentence, bigram):
+    computation = '\nIn the Bigram Add-One Model: \n'
+    text = pad_and_lowercase([sentence])
+    replace_unseens_with_unk(text, bigram)
+    subset = set()
+    sum_log_prob = 0
+    for i in range(len(text)-1):
+        subset.add((text[i], text[i+1], bigram[text[i]][text[i+1]]))
+        sum_log_prob += math.log(bigram[text[i]][text[i+1]], 2)
+
+    computation += "The following parameters need to be computed:\n"
+    log_prob = set()
+    for bigram in subset:
+        computation += '"' + str(bigram[0]) + " " + str(bigram[1]) + '" : ' + str(bigram[2]) + '\n'
+        log_prob.add((bigram[0], bigram[1], math.log(bigram[2], 2)))
+
+    computation += '\nThe log base 2 of each of these probabilities is:\n' + pretty_bigram(log_prob) + \
+                   '\nThe sum of the log probabilities (and the log probability of this text) is:\t' + \
+                   str(sum_log_prob)
+
+    m = len(text)
+    avg_log_prob = sum_log_prob/m
+    computation += '\nThe average log probability for this text is:\t' + str(avg_log_prob)
+
+    perplexity = 2 ** (-avg_log_prob)
+    computation += '\nThe perplexity for this text is:\t' + str(perplexity) + '\n'
 
     return computation
